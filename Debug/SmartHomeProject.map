@@ -4,6 +4,8 @@ c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
                               ./HAL/src/LCD_prog.o (__udivmodhi4)
 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodhi4.o)
                               ./HAL/src/LCD_prog.o (__divmodhi4)
+c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
+                              ./MCAL/src/uart.o (__udivmodsi4)
 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
                               c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm16.o (exit)
 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_fixunssfsi.o)
@@ -52,6 +54,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm16
 LOAD ./SRV/src/EEPROM_serv.o
 LOAD ./MCAL/src/DIO_prog.o
 LOAD ./MCAL/src/TWI_prog.o
+LOAD ./MCAL/src/uart.o
 LOAD ./HAL/src/EEPROM_prog.o
 LOAD ./HAL/src/LCD_prog.o
 LOAD ./main.o
@@ -149,7 +152,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x41ee
+.text           0x00000000     0x444e
  *(.vectors)
  .vectors       0x00000000       0x54 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm16.o
                 0x00000000                __vectors
@@ -227,11 +230,13 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .text          0x00000082        0x0 ./SRV/src/EEPROM_serv.o
  .text          0x00000082        0x0 ./MCAL/src/DIO_prog.o
  .text          0x00000082        0x0 ./MCAL/src/TWI_prog.o
+ .text          0x00000082        0x0 ./MCAL/src/uart.o
  .text          0x00000082        0x0 ./HAL/src/EEPROM_prog.o
  .text          0x00000082        0x0 ./HAL/src/LCD_prog.o
  .text          0x00000082        0x0 ./main.o
  .text          0x00000082        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
  .text          0x00000082        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodhi4.o)
+ .text          0x00000082        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
  .text          0x00000082        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
  .text          0x00000082       0x58 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_fixunssfsi.o)
                 0x00000082                __fixunssfsi
@@ -338,67 +343,84 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .text.TWI_enuMasterSendStopCondition
                 0x00002b86       0x2e ./MCAL/src/TWI_prog.o
                 0x00002b86                TWI_enuMasterSendStopCondition
+ .text.UART_init
+                0x00002bb4      0x10e ./MCAL/src/uart.o
+                0x00002bb4                UART_init
+ .text.UART_sendByte
+                0x00002cc2       0x2e ./MCAL/src/uart.o
+                0x00002cc2                UART_sendByte
+ .text.UART_recieveByte
+                0x00002cf0       0x1e ./MCAL/src/uart.o
+                0x00002cf0                UART_recieveByte
+ .text.UART_sendString
+                0x00002d0e       0x38 ./MCAL/src/uart.o
+                0x00002d0e                UART_sendString
+ .text.UART_receiveString
+                0x00002d46       0x8a ./MCAL/src/uart.o
+                0x00002d46                UART_receiveString
  .text.EEPROM_enuWriteDataByte
-                0x00002bb4       0x54 ./HAL/src/EEPROM_prog.o
-                0x00002bb4                EEPROM_enuWriteDataByte
+                0x00002dd0       0x54 ./HAL/src/EEPROM_prog.o
+                0x00002dd0                EEPROM_enuWriteDataByte
  .text.EEPROM_enuReadDataByte
-                0x00002c08       0x64 ./HAL/src/EEPROM_prog.o
-                0x00002c08                EEPROM_enuReadDataByte
+                0x00002e24       0x64 ./HAL/src/EEPROM_prog.o
+                0x00002e24                EEPROM_enuReadDataByte
  .text.LCD_enuInit
-                0x00002c6c      0x6a6 ./HAL/src/LCD_prog.o
-                0x00002c6c                LCD_enuInit
+                0x00002e88      0x6a6 ./HAL/src/LCD_prog.o
+                0x00002e88                LCD_enuInit
  .text.LCD_enuDisplayChar
-                0x00003312       0x2c ./HAL/src/LCD_prog.o
-                0x00003312                LCD_enuDisplayChar
+                0x0000352e       0x2c ./HAL/src/LCD_prog.o
+                0x0000352e                LCD_enuDisplayChar
  .text.LCD_enuSendCommand
-                0x0000333e       0x2c ./HAL/src/LCD_prog.o
-                0x0000333e                LCD_enuSendCommand
+                0x0000355a       0x2c ./HAL/src/LCD_prog.o
+                0x0000355a                LCD_enuSendCommand
  .text.LCD_invidSendCommand
-                0x0000336a      0x4a0 ./HAL/src/LCD_prog.o
+                0x00003586      0x4a0 ./HAL/src/LCD_prog.o
  .text.LCD_vidLatch
-                0x0000380a      0x496 ./HAL/src/LCD_prog.o
+                0x00003a26      0x496 ./HAL/src/LCD_prog.o
  .text.LCD_enuDisplayString
-                0x00003ca0       0x6a ./HAL/src/LCD_prog.o
-                0x00003ca0                LCD_enuDisplayString
+                0x00003ebc       0x6a ./HAL/src/LCD_prog.o
+                0x00003ebc                LCD_enuDisplayString
  .text.LCD_enuGoToRowCol
-                0x00003d0a       0x8e ./HAL/src/LCD_prog.o
-                0x00003d0a                LCD_enuGoToRowCol
+                0x00003f26       0x8e ./HAL/src/LCD_prog.o
+                0x00003f26                LCD_enuGoToRowCol
  .text.LCD_enuDisplayNumber
-                0x00003d98       0xd8 ./HAL/src/LCD_prog.o
-                0x00003d98                LCD_enuDisplayNumber
+                0x00003fb4       0xd8 ./HAL/src/LCD_prog.o
+                0x00003fb4                LCD_enuDisplayNumber
  .text.LCD_enuClear
-                0x00003e70       0x20 ./HAL/src/LCD_prog.o
-                0x00003e70                LCD_enuClear
+                0x0000408c       0x20 ./HAL/src/LCD_prog.o
+                0x0000408c                LCD_enuClear
  .text.LCD_enuDisplayStringRowCol
-                0x00003e90       0x3c ./HAL/src/LCD_prog.o
-                0x00003e90                LCD_enuDisplayStringRowCol
+                0x000040ac       0x3c ./HAL/src/LCD_prog.o
+                0x000040ac                LCD_enuDisplayStringRowCol
  .text.LCD_enuCreateCharacter
-                0x00003ecc       0x6a ./HAL/src/LCD_prog.o
-                0x00003ecc                LCD_enuCreateCharacter
+                0x000040e8       0x6a ./HAL/src/LCD_prog.o
+                0x000040e8                LCD_enuCreateCharacter
  .text.LCD_enuDisplayBinary
-                0x00003f36       0xa6 ./HAL/src/LCD_prog.o
-                0x00003f36                LCD_enuDisplayBinary
+                0x00004152       0xa6 ./HAL/src/LCD_prog.o
+                0x00004152                LCD_enuDisplayBinary
  .text.LCD_enuDisplayNumber_4Digit
-                0x00003fdc       0x84 ./HAL/src/LCD_prog.o
-                0x00003fdc                LCD_enuDisplayNumber_4Digit
- .text.main     0x00004060       0xce ./main.o
-                0x00004060                main
- .text.libgcc   0x0000412e       0x28 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
-                0x0000412e                __udivmodhi4
- .text.libgcc   0x00004156       0x26 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodhi4.o)
-                0x00004156                __divmodhi4
-                0x00004156                _div
- .text.libgcc   0x0000417c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
- .text.libgcc   0x0000417c       0x38 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
-                0x0000417c                __prologue_saves__
- .text.libgcc   0x000041b4       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
-                0x000041b4                __epilogue_restores__
- .text.libgcc   0x000041ea        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
-                0x000041ea                . = ALIGN (0x2)
+                0x000041f8       0x84 ./HAL/src/LCD_prog.o
+                0x000041f8                LCD_enuDisplayNumber_4Digit
+ .text.main     0x0000427c       0xce ./main.o
+                0x0000427c                main
+ .text.libgcc   0x0000434a       0x28 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
+                0x0000434a                __udivmodhi4
+ .text.libgcc   0x00004372       0x26 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodhi4.o)
+                0x00004372                __divmodhi4
+                0x00004372                _div
+ .text.libgcc   0x00004398       0x44 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
+                0x00004398                __udivmodsi4
+ .text.libgcc   0x000043dc        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x000043dc       0x38 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
+                0x000043dc                __prologue_saves__
+ .text.libgcc   0x00004414       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
+                0x00004414                __epilogue_restores__
+ .text.libgcc   0x0000444a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+                0x0000444a                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000041ea        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
-                0x000041ea                exit
-                0x000041ea                _exit
+ .fini9         0x0000444a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+                0x0000444a                exit
+                0x0000444a                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -417,22 +439,24 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000041ea        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .fini0         0x0000444a        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000041ee                _etext = .
+                0x0000444e                _etext = .
 
-.data           0x00800060        0x8 load address 0x000041ee
+.data           0x00800060        0x8 load address 0x0000444e
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm16.o
  .data          0x00800060        0x0 ./SRV/src/EEPROM_serv.o
  .data          0x00800060        0x0 ./MCAL/src/DIO_prog.o
  .data          0x00800060        0x0 ./MCAL/src/TWI_prog.o
+ .data          0x00800060        0x0 ./MCAL/src/uart.o
  .data          0x00800060        0x0 ./HAL/src/EEPROM_prog.o
  .data          0x00800060        0x0 ./HAL/src/LCD_prog.o
  .data          0x00800060        0x0 ./main.o
  .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
  .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodhi4.o)
+ .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
  .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
  .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_fixunssfsi.o)
  .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_addsub_sf.o)
@@ -464,11 +488,13 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  .bss           0x00800068        0x0 ./SRV/src/EEPROM_serv.o
  .bss           0x00800068        0x0 ./MCAL/src/DIO_prog.o
  .bss           0x00800068        0x0 ./MCAL/src/TWI_prog.o
+ .bss           0x00800068        0x0 ./MCAL/src/uart.o
  .bss           0x00800068        0x0 ./HAL/src/EEPROM_prog.o
  .bss           0x00800068        0x0 ./HAL/src/LCD_prog.o
  .bss           0x00800068        0x0 ./main.o
  .bss           0x00800068        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
  .bss           0x00800068        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodhi4.o)
+ .bss           0x00800068        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodsi4.o)
  .bss           0x00800068        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
  .bss           0x00800068        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_fixunssfsi.o)
  .bss           0x00800068        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_addsub_sf.o)
@@ -487,8 +513,8 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  *(.bss*)
  *(COMMON)
                 0x00800068                PROVIDE (__bss_end, .)
-                0x000041ee                __data_load_start = LOADADDR (.data)
-                0x000041f6                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0000444e                __data_load_start = LOADADDR (.data)
+                0x00004456                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800068        0x0
                 0x00800068                PROVIDE (__noinit_start, .)
@@ -513,23 +539,25 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
 .signature
  *(.signature*)
 
-.stab           0x00000000     0x41b8
+.stab           0x00000000     0x45cc
  *(.stab)
  .stab          0x00000000     0x1728 ./SRV/src/EEPROM_serv.o
  .stab          0x00001728      0xa14 ./MCAL/src/DIO_prog.o
                                 0xac8 (size before relaxing)
  .stab          0x0000213c      0x690 ./MCAL/src/TWI_prog.o
                                 0x744 (size before relaxing)
- .stab          0x000027cc      0x2a0 ./HAL/src/EEPROM_prog.o
+ .stab          0x000027cc      0x414 ./MCAL/src/uart.o
+                                0x624 (size before relaxing)
+ .stab          0x00002be0      0x2a0 ./HAL/src/EEPROM_prog.o
                                 0x354 (size before relaxing)
- .stab          0x00002a6c     0x14f4 ./HAL/src/LCD_prog.o
+ .stab          0x00002e80     0x14f4 ./HAL/src/LCD_prog.o
                                0x1734 (size before relaxing)
- .stab          0x00003f60      0x258 ./main.o
+ .stab          0x00004374      0x258 ./main.o
                                 0x4bc (size before relaxing)
 
-.stabstr        0x00000000     0x12af
+.stabstr        0x00000000     0x16e8
  *(.stabstr)
- .stabstr       0x00000000     0x12af ./SRV/src/EEPROM_serv.o
+ .stabstr       0x00000000     0x16e8 ./SRV/src/EEPROM_serv.o
 
 .stab.excl
  *(.stab.excl)
